@@ -19,19 +19,11 @@ export default {
     }
   },
   created() {
-    this.init();
+
   },
   methods:{
     init(){
-      var _self = this;
-      var params = {
-        keyword:'',
-        page:1,
-        pageSize:10
-      };
-      this.$api.get('/proxy/backend/get-blog-list',this.$utils.clearData(params),res => {
-        console.log(res);
-      });
+
     },
     changeLocale(obj, lang) {
       let locale = lang ? lang : Cookies.get('user_lang');

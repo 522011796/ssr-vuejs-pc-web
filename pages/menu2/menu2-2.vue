@@ -12,12 +12,10 @@ export default {
     }
   },
   created() {
-    this.init();
+
   },
   methods:{
-    init(page){
 
-    }
   }
 }
 </script>

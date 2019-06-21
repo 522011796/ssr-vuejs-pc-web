@@ -18,7 +18,7 @@
     },
     methods: {
       login(){
-        Cookies.set('token', 'success');
+        Cookie.remove("token");
         setTimeout("window.location = '/menu1/menu1-1';", 1000);
       }
     }

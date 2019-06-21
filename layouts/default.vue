@@ -20,34 +20,36 @@
 
     <div v-if="loadingShow">
       <div class="left-nav" :style="styleMenuObjectLeft">
-        <Menu :class="activeMenu == 'menu1' ? 'show' : 'hidden'" :active-name="activeSilder" mode="vertical" width="auto" @on-select="selSliderMenu">
-          <MenuItem name="menu1-menu1-1" :to="{path: '/menu1/menu1-1',name:'menu1-menu1-1'}">
-            <div style="text-align: center">
-              <Icon type="ios-paper" size="15"/>
-              menu1-1
-            </div>
-          </MenuItem>
-          <MenuItem name="menu1-menu1-2" :to="{path: '/menu1/menu1-1',name:'menu1-menu1-2'}">
-            <div style="text-align: center">
-              <Icon type="ios-paper" size="15"/>
-              menu1-2
-            </div>
-          </MenuItem>
-        </Menu>
+        <Menu ref="side_menu" :active-name="activeSilder" mode="vertical" width="auto" @on-select="selSliderMenu">
+          <div :class="activeMenu == 'menu1' ? 'show' : 'hidden'">
+            <MenuItem name="menu1-menu1-1" :to="{path: '/menu1/menu1-1',name:'menu1-menu1-1'}">
+              <div style="text-align: center">
+                <Icon type="ios-paper" size="15"/>
+                menu1-1
+              </div>
+            </MenuItem>
+            <MenuItem name="menu1-menu1-2" :to="{path: '/menu1/menu1-1',name:'menu1-menu1-2'}">
+              <div style="text-align: center">
+                <Icon type="ios-paper" size="15"/>
+                menu1-2
+              </div>
+            </MenuItem>
+          </div>
 
-        <Menu :class="activeMenu == 'menu2' ? 'show' : 'hidden'" :active-name="activeSilder" mode="vertical" width="auto" @on-select="selSliderMenu">
-          <MenuItem name="menu2-menu2-1" :to="{path: '/menu1/menu1-1',name:'menu2-menu2-1'}">
-            <div style="text-align: center">
-              <Icon type="ios-paper" size="15"/>
-              menu2-1
-            </div>
-          </MenuItem>
-          <MenuItem name="menu2-menu2-2" :to="{path: '/menu1/menu1-1',name:'menu2-menu2-2'}">
-            <div style="text-align: center">
-              <Icon type="ios-paper" size="15"/>
-              menu2-2
-            </div>
-          </MenuItem>
+          <div :class="activeMenu == 'menu2' ? 'show' : 'hidden'">
+            <MenuItem name="menu2-menu2-1" :to="{path: '/menu2/menu2-1',name:'menu2-menu2-1'}">
+              <div style="text-align: center">
+                <Icon type="ios-paper" size="15"/>
+                menu2-1
+              </div>
+            </MenuItem>
+            <MenuItem name="menu2-menu2-2" :to="{path: '/menu2/menu2-2',name:'menu2-menu2-2'}">
+              <div style="text-align: center">
+                <Icon type="ios-paper" size="15"/>
+                menu2-2
+              </div>
+            </MenuItem>
+          </div>
         </Menu>
       </div>
 
@@ -81,6 +83,13 @@
       }
     },
     created(){
+      if (process.browser) {
+        //某些情况下，可能需要
+        /*let activeSilder = localStorage.getItem("activeSilder") ? localStorage.getItem("activeSilder") : 'menu1-menu1-1';
+        this.activeSilder = activeSilder;
+        let activeMenu = localStorage.getItem("activeMenu") ? localStorage.getItem("activeMenu") : 'menu1';
+        this.activeMenu = activeMenu;*/
+      }
       this.hh();
     },
     methods: {
@@ -91,10 +100,6 @@
           this.$nextTick(function () {
             //默认选中
             this.loadingShow = true;
-            let activeSilder = localStorage.getItem("activeSilder") ? localStorage.getItem("activeSilder") : 'menu1-menu1-1';
-            this.activeSilder = activeSilder;
-            let activeMenu = localStorage.getItem("activeMenu") ? localStorage.getItem("activeMenu") : 'menu1';
-            this.activeMenu = activeMenu;
           });
         }
       },
@@ -107,6 +112,7 @@
           //this.$refs.side_menu.updateActiveName();
           this.$refs.top_menu.updateOpened();
           this.$refs.top_menu.updateActiveName();
+          this.$refs.top_menu.updateOpenKeys();
         });
       },
       selMainMenu(event){
