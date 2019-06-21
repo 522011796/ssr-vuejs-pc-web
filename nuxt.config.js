@@ -33,6 +33,10 @@ module.exports = {
   */
   plugins: [
     {src: '~plugins/iview', ssr: true},
+    '~plugins/i18n',
+    '~plugins/utils',
+    '~plugins/moment',
+    '~plugins/axios',
   ],
   /*
   ** Nuxt.js modules
@@ -40,6 +44,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
@@ -47,6 +52,15 @@ module.exports = {
   */
   axios: {
   },
+  proxy: [
+    [
+      '/proxy',
+      {
+        target: 'https://bbs.9451.com', // api主机
+        /*pathRewrite: { '^/proxy' : '/' }*/
+      }
+    ]
+  ],
   /*
   ** Build configuration
   */
@@ -54,7 +68,11 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    vendor: ['axios','js-cookie','i18n','moment','utils'],
     extend(config, ctx) {
     }
+  },
+  router: {
+    middleware: ['i18n','stats','auth']
   }
 }

@@ -8,11 +8,11 @@
         <Menu ref="top_menu" mode="horizontal" :active-name="activeMenu" @on-select="selMainMenu">
           <MenuItem name="menu1" :to="{path: '/menu1/menu1-1',name:'menu1-menu1-1'}">
             <Icon type="ios-paper" />
-            内容管理1
+            {{$t('lang.menuTest')}}
           </MenuItem>
           <MenuItem name="menu2" :to="{path: '/menu2/menu2-1',name:'menu2-menu2-1'}">
             <Icon type="ios-paper" />
-            内容管理2
+            {{$t('lang.menuTest')}}
           </MenuItem>
         </Menu>
       </div>
@@ -35,7 +35,7 @@
           </MenuItem>
         </Menu>
 
-        <Menu :class="activeMenu == 'menu2' ? 'show' : 'hidden'" :active-name="activeSilder" mode="vertical" width="auto">
+        <Menu :class="activeMenu == 'menu2' ? 'show' : 'hidden'" :active-name="activeSilder" mode="vertical" width="auto" @on-select="selSliderMenu">
           <MenuItem name="menu2-menu2-1" :to="{path: '/menu1/menu1-1',name:'menu2-menu2-1'}">
             <div style="text-align: center">
               <Icon type="ios-paper" size="15"/>
@@ -89,7 +89,12 @@
           this.styleMenuObjectLeft.height = window.innerHeight - 60 + 'px';
           this.styleMenuObjectRight.minHeight = window.innerHeight - 60 + 'px';
           this.$nextTick(function () {
+            //默认选中
             this.loadingShow = true;
+            let activeSilder = localStorage.getItem("activeSilder") ? localStorage.getItem("activeSilder") : 'menu1-menu1-1';
+            this.activeSilder = activeSilder;
+            let activeMenu = localStorage.getItem("activeMenu") ? localStorage.getItem("activeMenu") : 'menu1';
+            this.activeMenu = activeMenu;
           });
         }
       },
@@ -106,9 +111,13 @@
       },
       selMainMenu(event){
         this.activeMenu = event;
+        localStorage.setItem('activeMenu',event);
+        localStorage.removeItem("activeSilder");
       },
       selSliderMenu(event){
         this.activeSilder = event;
+        localStorage.setItem('activeSilder',event);
+        console.log(event);
       }
     },
     mounted() {
