@@ -37,6 +37,7 @@ module.exports = {
     '~plugins/utils',
     '~plugins/moment',
     '~plugins/axios',
+    '~plugins/validation',
   ],
   /*
   ** Nuxt.js modules

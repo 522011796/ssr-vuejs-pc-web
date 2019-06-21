@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="text-align: center;margin-top:10%;">
     <Button @click="login()">login</Button>
   </div>
 </template>
@@ -18,6 +18,7 @@
     },
     methods: {
       login(){
+        Cookies.set('token', 'success');
         setTimeout("window.location = '/menu1/menu1-1';", 1000);
       }
     }

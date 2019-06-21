@@ -4,7 +4,23 @@
     "introduction": "Welcome."
   },
   "lang": {
-    "menuTest" : "menuTest"
+    "menuTest" : "menuTest",
+    "inputRightTips":"该输入正确的信息!",
+    "inputMax":"最多输入",
+    "strNum":"个字符!",
+    "strLeng":"字符长度在",
+    "to":"至",
+    "between":"之间!",
+    "inputRightMail":"请输入正确的邮箱地址",
+    "inputRightPhone":"请输入正确的手机号码",
+    "inputRightCardId":"请输入15或者18位身份证号码",
+    "inputNotZero":"请输入非0的整数",
+    "inputTwoNum":"正整数且最多两位小数",
+    "inputSixtotwnty":"6-20位任意字符",
+    "inputRightMac":"请输入正确的mac地址",
+    "inputRightIp":"请输入正确的ip地址",
+    "selCheckbox":"请选择至少一个选项",
+    "arrayTips":"至少需要一项数据"
   }
 
 }

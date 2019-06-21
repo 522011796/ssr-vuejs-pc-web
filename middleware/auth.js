@@ -32,6 +32,9 @@ export default function ({ isHMR, app, store, route, params, error, redirect,req
   }else if (token && route.name === 'menu1-menu1-1') {
     // 已登录且要跳转的页面是根路径
     redirect('/menu1/menu1-1');
+  }else if (token && route.name === 'index') {
+    // 已登录且要跳转的页面是根路径
+    redirect('/menu1/menu1-1');
   }else if (token && route.name === null) {
     // 已登录且要跳转的页面是根路径
     redirect('/menu1/menu1-1');
