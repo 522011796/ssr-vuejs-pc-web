@@ -15,7 +15,7 @@ export default function ({ isHMR, app, store, route, params, error, redirect,req
 
   //在客户端判读是否需要登陆
   if (isClient) {
-    token = utils.getcookiesInClient('token')
+    token = utils.getcookiesInClient('token');
     path = route.path;
   }
 
@@ -23,7 +23,7 @@ export default function ({ isHMR, app, store, route, params, error, redirect,req
   if (!token && route.name !== 'login') {
     // 未登录且要跳转的页面不是登录页
     console.log(111);
-    redirect(path.name)
+    redirect("/login")
   } else if (!token && route.name === LOGIN_PAGE_NAME) {
     // 未登陆且要跳转的页面是登录页
     console.log(112);
@@ -31,7 +31,7 @@ export default function ({ isHMR, app, store, route, params, error, redirect,req
   } else if (token && route.name === LOGIN_PAGE_NAME) {
     // 已登录且要跳转的页面是登录页
     console.log(113);
-    redirect('/menu1/menu1-1');
+    redirect('/work/work-workDy');
   }/*else if (token && route.name === 'menu1-menu1-1') {
     // 已登录且要跳转的页面是根路径
     console.log(114);
@@ -39,11 +39,11 @@ export default function ({ isHMR, app, store, route, params, error, redirect,req
   }*/else if (token && route.name === 'index') {
     // 已登录且要跳转的页面是根路径
     console.log(115);
-    redirect('/menu1/menu1-1');
+    redirect('/work/work-workDy');
   }else if (token && route.name === null) {
     // 已登录且要跳转的页面是根路径
     console.log(116);
-    redirect('/menu1/menu1-1');
+    redirect('/work/work-workDy');
   } else {
     console.log(117);
     redirect(path.name)

@@ -4,57 +4,52 @@
       <div class="header-layout-logo">
         {{$t('system.title')}}
       </div>
-      <div class="header-layout-menu">
-        <span>
-          <Poptip placement="bottom-end" class="moreClass">
-            <span><Avatar icon="ios-person" /></span>
-            <div slot="content" class="listOprClass">
-              <div class="listOprDiv">
-                <span>{{username}}</span>
-              </div>
-              <Divider class="dividerClass"/>
-              <div class="listOprDiv">
-                <a href="javascript:void(0)">{{$t('system.newCreate')}}</a>
-              </div>
-              <div class="listOprDiv">
-                <a href="javascript:void(0)">{{$t('system.upload')}}</a>
-              </div>
-              <Divider class="dividerClass"/>
-              <div class="listOprDiv">
-                <a href="javascript:void(0)" class="redOprClass" @click.native="logout">{{$t('opr.logout')}}</a>
-              </div>
-            </div>
-          </Poptip>
-        </span>
-      </div>
+      <!--<div class="header-layout-menu">
+
+      </div>-->
     </div>
 
     <div v-if="loadingShow">
       <div class="left-nav" :style="styleMenuObjectLeft">
         <Menu ref="side_menu" :active-name="activeSilder" mode="vertical" width="auto" @on-select="selSliderMenu">
-          <div>
-            <MenuItem name="work-work-workDy" :to="{path: '/work/work-workDy',name:'work-work-workDy'}">
-              <div class="menyChildClass">
-                <Icon type="ios-cube" size="15"/>
+          <div :class="activeMenu == 'schoolDoc' ? 'show' : 'hidden'">
+            <MenuItem name="schoolDoc-school-deploy-doc" :to="{path: '/school-deploy-doc',name:'schoolDoc-school-deploy-doc'}">
+              <div style="text-align: center">
+                <Icon type="ios-school" size="15"/>
                 {{$t('childMenu.work')}}
               </div>
             </MenuItem>
-            <MenuItem name="face" :to="{path: '/face',name:'face'}">
-              <div class="menyChildClass">
-                <Icon type="ios-desktop" size="15"/>
+            <MenuItem name="schoolDoc-school-deploy-doc" :to="{path: '/school-deploy-doc',name:'schoolDoc-school-deploy-doc'}">
+              <div style="text-align: center">
+                <Icon type="ios-school" size="15"/>
                 {{$t('childMenu.face')}}
               </div>
             </MenuItem>
-            <MenuItem name="collect" :to="{path: '/collect',name:'collect'}">
-              <div class="menyChildClass">
-                <Icon type="ios-bookmark" size="15"/>
+            <MenuItem name="schoolDoc-school-deploy-doc" :to="{path: '/school-deploy-doc',name:'schoolDoc-school-deploy-doc'}">
+              <div style="text-align: center">
+                <Icon type="ios-school" size="15"/>
                 {{$t('childMenu.collect')}}
               </div>
             </MenuItem>
-            <MenuItem name="manage" :to="{path: '/manage',name:'manage'}">
-              <div class="menyChildClass">
-                <Icon type="ios-cog" size="15"/>
+            <MenuItem name="schoolDoc-school-deploy-doc" :to="{path: '/school-deploy-doc',name:'schoolDoc-school-deploy-doc'}">
+              <div style="text-align: center">
+                <Icon type="ios-school" size="15"/>
                 {{$t('childMenu.manage')}}
+              </div>
+            </MenuItem>
+          </div>
+
+          <div :class="activeMenu == 'menu2' ? 'show' : 'hidden'">
+            <MenuItem name="menu2-menu2-1" :to="{path: '/menu2/menu2-1',name:'menu2-menu2-1'}">
+              <div style="text-align: center">
+                <Icon type="ios-paper" size="15"/>
+                menu2-1
+              </div>
+            </MenuItem>
+            <MenuItem name="menu2-menu2-2" :to="{path: '/menu2/menu2-2',name:'menu2-menu2-2'}">
+              <div style="text-align: center">
+                <Icon type="ios-paper" size="15"/>
+                menu2-2
               </div>
             </MenuItem>
           </div>
@@ -64,31 +59,21 @@
       <div class="right-nav" :style="styleMenuObjectRight">
         <nuxt />
       </div>
-      <div style="background: #dddddd;width: 240px;float: right;">
-        123
-      </div>
       <div class="clearfix"></div>
     </div>
-
-    <!--<Drawer :title="$t('system.setDoc')" :closable="false" v-model="docStatus" width="90">
-      <div id="editor" v-if="!$isServer">
-        <mavon-editor style="height: 100%" v-model="editorContent"/>
-      </div>
-    </Drawer>-->
   </div>
 </template>
 
 <script>
-  import Cookies from 'js-cookie'
   export default {
     components: {
     },
     data() {
       return {
-        username: '',
+        username: 'admin',
         docStatus: false,
         loadingShow: false,
-        activeSilder: 'work-work-workDy',
+        activeSilder: 'docManage-school-doc',
         activeMenu: 'schoolDoc',
         styleMenuObjectLeft: {
           height: '',
@@ -109,8 +94,6 @@
         this.activeSilder = activeSilder;
         let activeMenu = localStorage.getItem("activeMenu") ? localStorage.getItem("activeMenu") : 'menu1';
         this.activeMenu = activeMenu;*/
-        let username = JSON.parse(Cookies.get("token"));
-        this.username = username.username;
       }
       this.hh();
     },
@@ -158,15 +141,6 @@
         }else if(event == 1){
           _self.docStatus = true;
         }
-      },
-      logout(){
-        this.$api.get("/proxy/api/logout", {} ,res => {
-          Cookies.remove('token');
-          console.log(111);
-          window.location = '/login'
-        },res=>{
-          console.log(res);
-        });
       }
     },
     mounted() {
@@ -195,7 +169,6 @@
   background: #ffffff;
   position: fixed;
   z-index: 2;
-  box-shadow: 0 2px 3px 0 rgba(100,100,100,0.06);
 }
 .left-nav{
   float: left;
@@ -208,7 +181,7 @@
 .right-nav{
   margin-left: 200px;
   text-align: left;
-  border-left:1px solid #eeeeee;
+  border-left:1px solid #dddddd;
   background: #f8f8f9;
   padding:10px 10px;
   position: relative;
@@ -219,20 +192,14 @@
   clear: both;
 }
 .header-layout-logo{
-  font-family: serif;
   width: 200px;
   height: 100%;
   text-align: center;
   background: #ffffff;
   float: left;
-  font-size: 15px;
-  font-weight: bold;
 }
 .header-layout-menu{
   margin-left: 200px;
-  text-align: right;
-  padding:0px 20px 0px 0px;
-  position: relative;
 }
 .header-layout-menu-list{
   width: 90%;
@@ -261,59 +228,6 @@
   padding: 10px 16px;
   text-align: right;
   background: #fff;
-}
-.menyChildClass{
-  text-align: left;
-  padding-left:35px;
-}
-.ivu-menu-vertical.ivu-menu-light:after {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 100%;
-  background: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-}
-.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu):after {
-  content: '';
-  display: block;
-  width: 2px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  background: none;
-}
-.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
-  color: #2d8cf0;
-  background: #f8f8f9;
-  z-index: 2;
-}
-.moreClass{
-  height:20px;
-  line-height: 20px;
-}
-.listOprDiv{
-  color: #808695;
-  padding:5px 0px;
-}
-.listOprDiv a{
-  color: #808695;
-  display: inline-block;
-  width: 100%;
-}
-.dividerClass{
-  margin: 5px 0px;
-}
-.redOprClass{
-  color:#ed4014 !important;
-}
-.listOprClass{
-  text-align: left;
 }
 .hidden{
   display: none !important;

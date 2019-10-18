@@ -75,15 +75,19 @@ function apiAxios (method, url ,params, success, failure, header) {
     withCredentials: false
   })
     .then(function (res) {
-      if (res.data.code == 200) {
+      if (res.data.errno == 0) {
         if (success) {
           success(res)
         }
-      }else if(res.data.code == 401){
+      }else if(res.data.errno == -1){
         //window.location = "/#/login";
         Cookie.remove(TOKEN_KEY);
         this.$router.push("/login");
-      }else if(res.data.code == 403){
+      }else if(res.data.errno == 401){
+        //window.location = "/#/login";
+        Cookie.remove(TOKEN_KEY);
+        this.$router.push("/login");
+      }else if(res.data.errno == 403){
         //window.location = "/#/login";
         Cookie.remove(TOKEN_KEY);
         this.$router.push("/login");

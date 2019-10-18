@@ -7,6 +7,6 @@ export default ({ app, store, req }) => {
   //时间格式化插件
   Vue.prototype.$moment = moment;
   const langSer = utils.getcookiesInServer(req).user_lang==='zh' ? 'zh_cn' : 'en';
-  const langCli = Cookie('user_lang')==='zh' ? 'zh_cn' : 'en';
+  const langCli = Cookie.get('user_lang')==='zh' ? 'zh_cn' : 'en';
   moment.locale(langCli);
 }

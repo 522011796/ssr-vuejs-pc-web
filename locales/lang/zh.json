@@ -1,7 +1,51 @@
 {
+  "system": {
+    "title": "内部系统",
+    "setDoc": "发布文档",
+    "logout": "退出登录",
+    "newCreate": "新建文档",
+    "upload": "上传文件"
+  },
+  "login": {
+    "title": "登录",
+    "username": "输入手机号",
+    "password": "输入密码"
+  },
+  "menu": {
+    "menuDoc": "文档管理",
+    "menuOther": "其他管理"
+  },
+  "childMenu": {
+    "schoolDoc": "校园文档",
+    "work": "工作台",
+    "face": "我的桌面",
+    "collect": "我的收藏",
+    "manage": "管理",
+    "workDy": "工作动态",
+    "lately": "最近使用",
+    "myCreate": "我创建的",
+    "shareMy": "共享给我的"
+  },
+  "docManage": {
+    "tabDeploy": "部署文档"
+  },
   "home": {
     "title": "欢迎",
     "introduction": "中文介绍测试."
+  },
+  "opr": {
+    "delete": "删除",
+    "resetName": "重命名",
+    "collect": "收藏",
+    "logout": "退出登录"
+  },
+  "common": {
+    "resetNameModelTitle": "重命名文件",
+    "resetNameModelInput": "请输入新的文件名",
+    "deleteModelTitle": "删除文档",
+    "deleteModelContent": "确认删除文件？删除后，所有协作者都无法访问此文件",
+    "ok": "确定",
+    "cancel": "取消"
   },
   "lang": {
     "menuTest" : "内容管理",

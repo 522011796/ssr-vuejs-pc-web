@@ -26,7 +26,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~assets/main.css'
+    '~assets/main.css',
+    'mavon-editor/dist/css/index.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -38,6 +39,7 @@ module.exports = {
     '~plugins/moment',
     '~plugins/axios',
     '~plugins/validation',
+    {src: '~/plugins/mavon-editor',ssr: false}
   ],
   /*
   ** Nuxt.js modules
@@ -57,7 +59,7 @@ module.exports = {
     [
       '/proxy',
       {
-        target: 'https://bbs.9451.com', // api主机
+        target: 'http://localhost:8360', // api主机
         /*pathRewrite: { '^/proxy' : '/' }*/
       }
     ]

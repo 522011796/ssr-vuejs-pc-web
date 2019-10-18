@@ -16,8 +16,9 @@
     "caniuse-lite": "^1.0.30000974",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
-    "iview": "^3.4.2",
-    "js-cookie": "^2.2.0",
+    "iview": "^3.5.1",
+    "js-cookie": "^2.2.1",
+    "mavon-editor": "^2.7.6",
     "moment": "^2.24.0",
     "nuxt": "^2.0.0",
     "vue-i18n": "^8.11.2"
