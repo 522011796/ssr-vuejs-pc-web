@@ -19,13 +19,13 @@ export default {
   },
   //获取客户端cookie
   getcookiesInClient: function (key) {
-    return Cookie.get(key) ? Cookie.get(key) : ''
+    return Cookie.get(key) ? Cookie.get(key) : '';
   },
   setToken: function (token) {
-    Cookie.set(TOKEN_KEY, token, {expires: 1 || 1})
+    Cookie.set(TOKEN_KEY, token, {expires: 1 || 1});
   },
   getToken: function () {
-    const token = Cookie.get(TOKEN_KEY)
+    const token = Cookie.get(TOKEN_KEY);
     if (token) return token;
     else return false
   },
