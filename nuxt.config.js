@@ -27,7 +27,8 @@ module.exports = {
   */
   css: [
     '~assets/main.css',
-    'mavon-editor/dist/css/index.css'
+    'mavon-editor/dist/css/index.css',
+    'highlight.js/styles/monokai-sublime.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -47,13 +48,39 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/markdownit'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+  },
+  markdownit: {
+    preset: 'default',
+    injected: true,
+    linkify: true,
+    breaks: true,
+    use: [
+      'markdown-it-emoji',
+      'markdown-it-attrs',
+      'markdown-it-mark',
+      'markdown-it-deflist',
+      'markdown-it-container',
+      'markdown-it-katex',
+      'markdown-it-link-attributes',
+      'markdown-it-task-lists',
+      'markdown-it-sub',
+      'markdown-it-sup',
+      'markdown-it-div',
+      'markdown-it-table-of-contents'
+    ],
+    typographer: true,
+    quotes: '“”‘’',
+    highlight: function (str, lang) {
+      return hljs.highlightAuto(str).value;
+    }
   },
   proxy: [
     [

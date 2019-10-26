@@ -4,6 +4,209 @@
   font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   background: #f7f7f7;
 }
+.emoji {
+  height: 1.2em;
+}
+.demo-options {
+  margin-bottom: 30px;
+}
+.opt__strict .not-strict {
+  opacity: 0.3;
+}
+.checkbox {
+  margin-right: 10px;
+}
+.source {
+  width: 100%;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 13px;
+  padding: 2px;
+}
+.result-html {
+  padding: 2px 10px;
+  overflow: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.result-html img {
+  max-width: 35%;
+}
+.result-src,
+.result-debug {
+  display: none;
+}
+.result-src-content,
+.result-debug-content {
+  white-space: pre;
+}
+.result-as-html .result-html {
+  display: block;
+}
+.result-as-html .result-src,
+.result-as-html .result-debug {
+  display: none;
+}
+.result-as-src .result-src {
+  display: block;
+}
+.result-as-src .result-html,
+.result-as-src .result-debug {
+  display: none;
+}
+.result-as-debug .result-debug {
+  display: block;
+}
+.result-as-debug .result-html,
+.result-as-debug .result-src {
+  display: none;
+}
+.demo-control {
+  position: absolute;
+  right: 15px;
+  top: -17px;
+  border-radius: 6px 6px 0 0;
+  font-size: 12px;
+  background-color: #ddd;
+}
+.demo-control a {
+  padding: 0 20px;
+}
+.demo-control a:first-child {
+  padding-left: 30px;
+}
+.demo-control a:last-child {
+  padding-right: 30px;
+}
+.hljs {
+  padding: 9.5px;
+}
+.hljs code {
+  white-space: pre;
+}
+.footnotes {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-count: 2;
+}
+.footnotes-list {
+  padding-left: 2em;
+}
+.warning {
+  background-color: #ff8;
+  padding: 20px;
+  border-radius: 6px;
+}
+.gh-ribbon {
+  display: block;
+  position: absolute;
+  right: -60px;
+  top: 44px;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width: 230px;
+  z-index: 10000;
+  white-space: nowrap;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #686868;
+  -webkit-box-shadow: 0 0 2px rgba(102,102,102,0.4);
+  box-shadow: 0 0 2px rgba(102,102,102,0.4);
+  padding: 1px 0;
+}
+.gh-ribbon a {
+  text-decoration: none !important;
+  border: 1px solid #ccc;
+  color: #fff;
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  outline: medium none;
+  padding: 4px 50px 2px;
+  text-align: center;
+}
+.form-inline .radio,
+.form-inline .checkbox {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.form-inline .form-group {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+.form-inline .form-control {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+}
+/* 代码块高亮 */
+pre {position: relative;margin-bottom: 24px;border-radius: 3px;border: 1px solid #C3CCD0;color: #000000;background: #888888;overflow: hidden;}
+code {display: block;padding: 12px 24px;overflow-y: auto;font-weight: 300;font-family: Menlo, monospace;}
+code.has-numbering {margin-left: 21px;}
+.pre-numbering {position: absolute;top: 0;left: 0;width: 20px;padding: 12px 2px 12px 0;border-right: 1px solid #C3CCD0;border-radius: 3px 0 0 3px;background-color: #EEE;text-align: right;font-family: Menlo, monospace;font-size: 0.8em;color: #AAA;}
+
+.contentHtmlClass img{
+  max-height: 35%;
+}
+.contentHtmlClass blockquote {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+}
+.contentHtmlClass blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: 5px solid #eee;
+}
+.contentHtmlClass blockquote:before, .contentHtmlClass blockquote:after {
+  content: "";
+}
+.contentHtmlClass hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.contentHtmlClass table {
+  width: 100%;
+  overflow: auto;
+  border: 1px solid #dddddd;
+}
+
+.contentHtmlClass table th {
+  background: #f5f5f5;
+  height:35px;
+  line-height: 35px;
+  border: 1px solid #dddddd;
+}
+.contentHtmlClass table td {
+  background: #ffffff;
+  height:35px;
+  line-height: 35px;
+  text-align: center;
+  border: 1px solid #dddddd;
+}
+
+.contentHtmlClass table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.contentHtmlClass .contains-task-list{
+  list-style: none;
+}
+.contentHtmlClass .hljs-left{
+  text-align: left;
+}
+.contentHtmlClass .hljs-center{
+  text-align: center;
+}
+.contentHtmlClass .hljs-right{
+  text-align: right;
+}
 /**
   重写顶部用户头像的poptip的箭头的位置
  */

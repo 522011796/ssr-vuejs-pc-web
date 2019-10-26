@@ -36,6 +36,7 @@
   "opr": {
     "delete": "删除",
     "resetName": "重命名",
+    "edit": "编辑",
     "collect": "收藏",
     "logout": "退出登录"
   },
@@ -45,7 +46,14 @@
     "deleteModelTitle": "删除文档",
     "deleteModelContent": "确认删除文件？删除后，所有协作者都无法访问此文件",
     "ok": "确定",
-    "cancel": "取消"
+    "cancel": "取消",
+    "update": "更新",
+    "open": "打开",
+    "release": "发布",
+    "docTitle": "标题",
+    "docInputTitle": "请输入标题",
+    "me": "我",
+    "create": "创建"
   },
   "lang": {
     "menuTest" : "内容管理",
@@ -64,6 +72,7 @@
     "inputRightMac":"请输入正确的mac地址",
     "inputRightIp":"请输入正确的ip地址",
     "selCheckbox":"请选择至少一个选项",
-    "arrayTips":"至少需要一项数据"
+    "arrayTips":"至少需要一项数据",
+    "inputRightReleaseTips":"标题和内容不能为空!"
   }
 }

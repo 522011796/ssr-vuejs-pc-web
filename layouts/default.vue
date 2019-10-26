@@ -14,14 +14,14 @@
               </div>
               <Divider class="dividerClass"/>
               <div class="listOprDiv">
-                <a href="javascript:void(0)">{{$t('system.newCreate')}}</a>
+                <a href="javascript:void(0)" @click="createDoc">{{$t('system.newCreate')}}</a>
               </div>
               <div class="listOprDiv">
                 <a href="javascript:void(0)">{{$t('system.upload')}}</a>
               </div>
               <Divider class="dividerClass"/>
               <div class="listOprDiv">
-                <a href="javascript:void(0)" class="redOprClass" @click.native="logout">{{$t('opr.logout')}}</a>
+                <a href="javascript:void(0)" class="redOprClass" @click="logout">{{$t('opr.logout')}}</a>
               </div>
             </div>
           </Poptip>
@@ -33,24 +33,24 @@
       <div class="left-nav" :style="styleMenuObjectLeft">
         <Menu ref="side_menu" :active-name="activeSilder" mode="vertical" width="auto" @on-select="selSliderMenu">
           <div>
-            <MenuItem name="work-work-workDy" :to="{path: '/work/work-workDy',name:'work-work-workDy'}">
+            <MenuItem name="work" :to="{path: '/work/work-workDy',name:'work-work-workDy'}">
               <div class="menyChildClass">
                 <Icon type="ios-cube" size="15"/>
                 {{$t('childMenu.work')}}
               </div>
             </MenuItem>
-            <MenuItem name="face" :to="{path: '/face',name:'face'}">
+            <!--<MenuItem name="face" :to="{path: '/face',name:'face'}">
               <div class="menyChildClass">
                 <Icon type="ios-desktop" size="15"/>
                 {{$t('childMenu.face')}}
               </div>
-            </MenuItem>
-            <MenuItem name="collect" :to="{path: '/collect',name:'collect'}">
+            </MenuItem>-->
+            <!--<MenuItem name="collect" :to="{path: '/collect',name:'collect'}">
               <div class="menyChildClass">
                 <Icon type="ios-bookmark" size="15"/>
                 {{$t('childMenu.collect')}}
               </div>
-            </MenuItem>
+            </MenuItem>-->
             <MenuItem name="manage" :to="{path: '/manage',name:'manage'}">
               <div class="menyChildClass">
                 <Icon type="ios-cog" size="15"/>
@@ -64,22 +64,31 @@
       <div class="right-nav" :style="styleMenuObjectRight">
         <nuxt />
       </div>
-      <div style="background: #dddddd;width: 240px;float: right;">
-        123
-      </div>
       <div class="clearfix"></div>
     </div>
 
-    <!--<Drawer :title="$t('system.setDoc')" :closable="false" v-model="docStatus" width="90">
-      <div id="editor" v-if="!$isServer">
-        <mavon-editor style="height: 100%" v-model="editorContent"/>
+    <Drawer :closable="true" :mask="true" :mask-closable="false" @on-visible-change="closeDrawer" v-model="docStatus" width="90">
+      <div slot="header" class="drawerTitle">
+        <span>{{$t('system.setDoc')}}</span>
+        <Button type="success" size="small" style="margin-left: 20px" @click="releaseBtn">{{$t('common.release')}}</Button>
+        <span class="redOprClass font12">{{releaseErrTips}}</span>
       </div>
-    </Drawer>-->
+      <div v-if="!$isServer">
+        <span>{{$t('common.docTitle')}}</span>
+        <span>
+          <Input v-model="docTitle" :placeholder="$t('common.docInputTitle')" :maxLength="30" style="width: 400px;background: #ffffff" />
+        </span>
+      </div>
+      <div id="editor" v-if="!$isServer" style="margin-top: 20px">
+        <mavon-editor :toolbars="markdownOption" style="height: 100%" v-model="editorContent"/>
+      </div>
+    </Drawer>
   </div>
 </template>
 
 <script>
   import Cookies from 'js-cookie'
+
   export default {
     components: {
     },
@@ -99,7 +108,45 @@
           height: '',
           position: 'relative'
         },
-        editorContent: ''
+        editorContent: '',
+        docTitle: '',
+        releaseErrTips: '',
+        docId: '',
+        markdownOption: {
+          bold: true, // 粗体
+          italic: true, // 斜体
+          header: true, // 标题
+          underline: true, // 下划线
+          strikethrough: true, // 中划线
+          mark: true, // 标记
+          superscript: false, // 上角标
+          subscript: false, // 下角标
+          quote: true, // 引用
+          ol: true, // 有序列表
+          ul: true, // 无序列表
+          link: false, // 链接
+          imagelink: true, // 图片链接
+          code: true, // code
+          table: true, // 表格
+          fullscreen: true, // 全屏编辑
+          readmodel: true, // 沉浸式阅读
+          htmlcode: true, // 展示html源码
+          help: true, // 帮助
+          /* 1.3.5 */
+          undo: false, // 上一步
+          redo: false, // 下一步
+          trash: true, // 清空
+          save: false, // 保存（触发events中的save事件）
+          /* 1.4.2 */
+          navigation: true, // 导航目录
+          /* 2.1.8 */
+          alignleft: true, // 左对齐
+          aligncenter: true, // 居中
+          alignright: true, // 右对齐
+          /* 2.2.1 */
+          subfield: true, // 单双栏模式
+          preview: false, // 预览
+        }
       }
     },
     created(){
@@ -127,8 +174,8 @@
       },
       setActive(){//设置菜单的选中状态，路由变化和直接通过浏览器输入对应地址，也可以设置相应的选中状态
         this.activeSilder = this.$route.name;
-        if(this.$route.name == "schoolDoc-school-deploy-doc-2"){
-          this.activeSilder = "schoolDoc-school-deploy-doc";
+        if(this.$route.name.indexOf("work-work-") != -1){
+          this.activeSilder = "work";
         }
         this.activeMenu = this.$route.name.split("-")[0];
 
@@ -150,19 +197,48 @@
         localStorage.setItem('activeSilder',event);
         //console.log(event);
       },
-      addDoc(event){
-        console.log(event);
-        var _self = this;
-        if (event == 0){
-
-        }else if(event == 1){
-          _self.docStatus = true;
+      closeDrawer(event){
+        if (event == true){
+          this.docTitle = "";
+          this.editorContent = "";
+          this.releaseErrTips = "";
+        }else{
+          this.$store.commit("SET_SHOW",false);
+          this.docId = "";
         }
+      },
+      createDoc(event){
+        var _self = this;
+        this.docStatus = true;
+      },
+      releaseBtn(){
+        this.releaseErrTips = "";
+        if (this.docTitle.match(/^[ ]*$/) || this.editorContent.match(/^[ ]*$/)){
+          this.releaseErrTips = this.$t("lang.inputRightReleaseTips");
+          return;
+        }
+
+        var params = {
+          content: this.editorContent,
+          title: this.docTitle
+        };
+
+        if (this.docId != ""){
+          params['pageType'] = "edit";
+          params['docId'] = this.docId;
+        }
+
+        this.$api.postQs("/proxy/api/doc", params ,res => {
+          this.$Message.success(res.data.errmsg);
+          this.docStatus = false;
+          this.$store.commit("SET_SHOW",false);
+        },res=>{
+          this.$Message.error(res.data.errmsg);
+        },{"Content-Type":'application/x-www-form-urlencoded; charset=UTF-8'});
       },
       logout(){
         this.$api.get("/proxy/api/logout", {} ,res => {
           Cookies.remove('token');
-          console.log(111);
           window.location = '/login'
         },res=>{
           console.log(res);
@@ -182,6 +258,14 @@
     watch: {
       '$route': function (to, from) {//监听路由变化,为了浏览器点击后退和前进也能切换菜单选中
         this.setActive();
+      },
+      '$store.state.showAddDoc': function () {
+        this.docStatus = this.$store.state.showAddDoc;
+      },
+      '$store.state.showDocDetail': function () {
+        this.docTitle = this.$store.state.showDocDetail.title;
+        this.editorContent = this.$store.state.showDocDetail.content;
+        this.docId = this.$store.state.showDocDetail.id;
       }
     }
   }
@@ -314,6 +398,13 @@
 }
 .listOprClass{
   text-align: left;
+}
+.drawerTitle{
+  font-size: 15px;
+  font-weight: bold;
+}
+.font12{
+  font-size: 12px;
 }
 .hidden{
   display: none !important;

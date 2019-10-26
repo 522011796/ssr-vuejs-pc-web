@@ -82,15 +82,17 @@ function apiAxios (method, url ,params, success, failure, header) {
       }else if(res.data.errno == -1){
         //window.location = "/#/login";
         Cookie.remove(TOKEN_KEY);
-        this.$router.push("/login");
+        //this.$router.push("/login");
+        window.location = "/login";
       }else if(res.data.errno == 401){
-        //window.location = "/#/login";
         Cookie.remove(TOKEN_KEY);
-        this.$router.push("/login");
+        //this.$router.push("/login");
+        window.location = "/login";
       }else if(res.data.errno == 403){
         //window.location = "/#/login";
         Cookie.remove(TOKEN_KEY);
-        this.$router.push("/login");
+        //this.$router.push("/login");
+        window.location = "/login";
       }else {
         if (failure) {
           failure(res)

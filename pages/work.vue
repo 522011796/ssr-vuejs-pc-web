@@ -1,10 +1,10 @@
 <template>
   <div>
     <div>
-      <span class="tabClass" :class="selStatus == 1 ? 'active' : ''" @click="selTab($event,1,'/work/work-workDy')">{{$t('childMenu.workDy')}}</span>
-      <span class="tabClass" :class="selStatus == 2 ? 'active' : ''" @click="selTab($event,2)">{{$t('childMenu.lately')}}</span>
-      <span class="tabClass" :class="selStatus == 3 ? 'active' : ''" @click="selTab($event,3)">{{$t('childMenu.myCreate')}}</span>
-      <span class="tabClass" :class="selStatus == 4 ? 'active' : ''" @click="selTab($event,4)">{{$t('childMenu.shareMy')}}</span>
+      <span class="tabClass" :class="selStatus == 'work-work-workDy' ? 'active' : ''" @click="selTab($event,'work-work-workDy','/work/work-workDy')">{{$t('childMenu.workDy')}}</span>
+      <span class="tabClass" :class="selStatus == 'work-work-workLately' ? 'active' : ''" @click="selTab($event,'work-work-workLately','/work/work-workLately')">{{$t('childMenu.lately')}}</span>
+      <span class="tabClass" :class="selStatus == 'work-work-workCreate' ? 'active' : ''" @click="selTab($event,'work-work-workCreate','/work/work-workCreate')">{{$t('childMenu.myCreate')}}</span>
+      <span class="tabClass" :class="selStatus == 'work-work-workShared' ? 'active' : ''" @click="selTab($event,'work-work-workShared','/work/work-workShared')">{{$t('childMenu.shareMy')}}</span>
     </div>
 
     <div class="mainDiv">
@@ -18,17 +18,22 @@
   export default {
     data () {
       return {
-        selStatus: 1
+        selStatus: 'work-work-workDy'
       }
     },
     created() {
-
+      this.init();
     },
     methods:{
       init(){
-
+        this.selStatus = this.$route.name;
       },
       selTab(event,type,url){
+        if (type == "work-work-workShared"){
+          this.$Message.info('还没做呢！');
+          return;
+        }
+
         this.selStatus = type;
         this.$router.push(
           {

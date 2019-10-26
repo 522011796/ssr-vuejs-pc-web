@@ -13,4 +13,10 @@ export const mutations = {
   SET_TOKEN(state, value) {
     state.token = value
   },
+  SET_SHOW(state, value) {
+    state.showAddDoc = value;
+  },
+  SET_DOC_DETAIL(state, value) {
+    state.showDocDetail = value;
+  },
 }
