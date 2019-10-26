@@ -235,6 +235,8 @@
     },
     watch: {
       '$store.state.showAddDoc': function () {
+        console.log(11111);
+        console.log(this.$store.state.showAddDoc);
         if(this.$store.state.showAddDoc == false){
           this.init();
         }
